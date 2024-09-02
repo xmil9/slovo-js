@@ -1,0 +1,25 @@
+.word-list-table {
+	width: 100%;
+}
+
+.mat-column-id {
+	width: 32px;
+	padding-right: 24px;
+	text-align: center;
+    font-size: 16px;
+	border-right: 1px solid currentColor;
+}
+
+.mat-column-english {
+	font-size: 16px;
+	border-right: 1px solid currentColor;
+}
+
+.mat-column-russian {
+	font-size: 16px;
+	border-right: 1px solid currentColor;
+}
+
+.mat-column-word-class {
+	font-size: 16px;
+}
