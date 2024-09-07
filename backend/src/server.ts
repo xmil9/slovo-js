@@ -32,13 +32,33 @@ interface Error {
 }
 
 // Define routes
-app.get('/api/data', (req: Request, res: Response<Word[] | Error>) => {
-    db.all('SELECT * FROM words', (err, rows: Word[]) => {
+app.get('/api/words', (req: Request, res: Response<Word[] | Error>) => {
+    db.all('SELECT * FROM words', (err, result: any) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
         }
-        res.json(rows);
+        res.json(result);
+    });
+});
+
+app.get('/api/word-count', (req: Request, res: Response<number | Error>) => {
+    db.get('SELECT COUNT(*) FROM words', (err, result: any) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(result['COUNT(*)']);
+    });
+});
+
+app.get('/api/word/:wordId', (req: Request, res: Response<Word | Error>) => {
+    db.get(`SELECT * FROM words WHERE id=?`, [req.params.wordId], (err, result: any) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(result);
     });
 });
 
