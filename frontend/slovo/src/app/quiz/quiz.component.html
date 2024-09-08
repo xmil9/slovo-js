@@ -1,4 +1,29 @@
-<h1>Quiz</h1>
-<p>English: {{ word.en }}</p>
-<p>Russian: {{ word.ru }}</p>
-<button (click)="updateWord()">Next Word</button>
+<div>
+	<mat-card>
+		<mat-card-title>Quiz</mat-card-title>
+		<mat-card-content>
+			<p>English {{ word.en }}</p>
+
+			<div>
+				<label for="tranlation">Russian </label>
+				<input type="text" id="tranlation" name="tranlation" required [(ngModel)]="translation" />
+				<button (click)="evaluate()">✓</button>
+				<button (click)="reveal()">?</button>
+				<button (click)="next()">></button>
+			</div>
+
+			<div *ngIf="isEvaluated">
+				<div *ngIf="isCorrect; else incorrect">
+					<p>Correct</p>
+				</div>
+				<ng-template #incorrect>
+					<p>Wrong</p>
+				</ng-template>
+			</div>
+
+			<div *ngIf="isRevealed">
+				<p>{{ word.ru }}</p>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>
