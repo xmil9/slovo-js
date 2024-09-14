@@ -1,29 +1,30 @@
-<div>
+<div class="quiz">
 	<mat-card>
-		<mat-card-title>Quiz</mat-card-title>
-		<mat-card-content>
-			<p>English {{ word.en }}</p>
+		<mat-card-header>
+			<mat-card-title>Quiz</mat-card-title>
+		</mat-card-header>
 
-			<div>
-				<label for="tranlation">Russian </label>
-				<input type="text" id="tranlation" name="tranlation" required [(ngModel)]="translation" />
-				<button (click)="evaluate()">✓</button>
-				<button (click)="reveal()">?</button>
-				<button (click)="next()">></button>
-			</div>
-
-			<div *ngIf="isEvaluated">
-				<div *ngIf="isCorrect; else incorrect">
-					<p>Correct</p>
-				</div>
-				<ng-template #incorrect>
-					<p>Wrong</p>
-				</ng-template>
-			</div>
-
-			<div *ngIf="isRevealed">
-				<p>{{ word.ru }}</p>
+		<mat-card-content class="card-content">
+			<div class="word-lang">English</div>
+			<div class="word">{{ word.en }}</div>
+			<div class="word-class">{{ word.wordClass }}</div>
+			<div class="translation-lang">Russian</div>
+			<div class="translation">
+				<input type="text" id="translation" name="translation" required [(ngModel)]="translation" />
+				<span class="evaluate" [hidden]="!isEvaluated">
+					<span *ngIf="isCorrect; else incorrect">Correct</span>
+					<ng-template #incorrect>
+						<span>Wrong</span>
+					</ng-template>
+				</span>
+				<span class="reveal" [hidden]="!isRevealed">{{ word.ru }}</span>
 			</div>
 		</mat-card-content>
+		
+		<mat-card-actions class="card-actions">
+			<button mat-button (click)="evaluate()">Check</button>
+			<button mat-button (click)="reveal()">Reveal</button>
+			<button mat-button (click)="next()">Next</button>
+		</mat-card-actions>
 	</mat-card>
 </div>

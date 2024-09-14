@@ -4,6 +4,7 @@ import { concatMap, iif, of, tap } from 'rxjs';
 import { randomInt } from '../util';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
@@ -14,7 +15,7 @@ function calcRandomWordId(numWords: number): WordId {
 @Component({
 	selector: 'app-quiz',
 	standalone: true,
-	imports: [ FormsModule, MatCardModule, MatFormFieldModule, NgIf ],
+	imports: [ FormsModule, MatButton, MatCardModule, MatFormFieldModule, NgIf ],
 	templateUrl: './quiz.component.html',
 	styleUrl: './quiz.component.css'
 })

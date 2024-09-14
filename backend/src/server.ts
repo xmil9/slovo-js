@@ -1,14 +1,14 @@
 import express, { Request, Response } from 'express';
 import sqlite3 from 'sqlite3';
 import cors from 'cors';
+import { Error, Word } from './types';
+
+const port = 3000;
+const dbPath = './assets/db/russian.db';
 
 const app = express();
-const port = 3000;
-
 // Disable CORS.
 app.use(cors());
-
-const dbPath = './assets/db/russian.db';
 
 // Connect to SQLite database
 const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
@@ -18,18 +18,6 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
         console.log('Connected to the SQLite database.');
     }
 });
-
-// Define types for your data rows if needed
-interface Word {
-	id: number;
-    ru: string;
-    en: string;
-    wordClass: string;
-}
-
-interface Error {
-	error: string;
-}
 
 // Define routes
 app.get('/api/words', (req: Request, res: Response<Word[] | Error>) => {

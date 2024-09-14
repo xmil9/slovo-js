@@ -1,0 +1,49 @@
+.quiz {
+	margin: 0% 10%;
+}
+
+.card-content {
+	padding-top: 20px;
+	padding-left: 30px;
+}
+
+.word-lang {
+	margin-top: 5px;
+}
+
+.word {
+	margin-top: 5px;
+	margin-left: 20px;
+	font-weight: 500;
+}
+
+.word-class {
+	margin-left: 20px;
+	font-size: small;
+}
+
+.translation-lang {
+	margin-top: 15px;
+}
+
+.translation {
+	margin-top: 5px;
+	margin-left: 20px;
+}
+
+.evaluate {
+	margin-left: 30px;
+}
+
+.reveal {
+	margin-left: 30px;
+}
+
+.card-actions {
+	padding-top: 20px;
+	padding-left: 10px;
+}
+
+button {
+	margin-right: 0px;
+}

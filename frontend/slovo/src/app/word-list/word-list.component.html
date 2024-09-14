@@ -1,28 +1,30 @@
-<p>Word List</p>
+<div class="word-list">
+	<p>Word List</p>
 
-<table mat-table [dataSource]="words" class="mat-elevation-z8 word-list-table">
+	<table mat-table [dataSource]="words" class="mat-elevation-z8 word-list-table">
 
-	<ng-container matColumnDef="id">
-		<th mat-header-cell *matHeaderCellDef> Id </th>
-		<td mat-cell *matCellDef="let word"> {{word.id}} </td>
-	</ng-container>
-	
-	<ng-container matColumnDef="english">
-		<th mat-header-cell *matHeaderCellDef> English </th>
-		<td mat-cell *matCellDef="let word"> {{word.en}} </td>
-	</ng-container>
-	
-	<ng-container matColumnDef="russian">
-		<th mat-header-cell *matHeaderCellDef> Russian </th>
-		<td mat-cell *matCellDef="let word"> {{word.ru}} </td>
-	</ng-container>
-	
-	<ng-container matColumnDef="word-class">
-		<th mat-header-cell *matHeaderCellDef> Class </th>
-		<td mat-cell *matCellDef="let word"> {{word.wordClass}} </td>
-	</ng-container>
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef> Id </th>
+			<td mat-cell *matCellDef="let word"> {{word.id}} </td>
+		</ng-container>
 
-	<tr mat-header-row *matHeaderRowDef="columns"></tr>
-	<tr mat-row *matRowDef="let row; columns: columns;"></tr>
-	  
-</table>
+		<ng-container matColumnDef="english">
+			<th mat-header-cell *matHeaderCellDef> English </th>
+			<td mat-cell *matCellDef="let word"> {{word.en}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="russian">
+			<th mat-header-cell *matHeaderCellDef> Russian </th>
+			<td mat-cell *matCellDef="let word"> {{word.ru}} </td>
+		</ng-container>
+
+		<ng-container matColumnDef="word-class">
+			<th mat-header-cell *matHeaderCellDef> Class </th>
+			<td mat-cell *matCellDef="let word"> {{word.wordClass}} </td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="columns"></tr>
+		<tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+	</table>
+</div>
