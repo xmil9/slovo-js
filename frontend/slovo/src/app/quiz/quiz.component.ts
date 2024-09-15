@@ -36,7 +36,6 @@ export class QuizComponent {
 	translation = '';
 	isCorrect = false;
 	isEvaluated = false;
-	isRevealed = false;
 	@ViewChild('translationInput') translationInput!: ElementRef;
 	
 	constructor(private wordService: WordService) { }
@@ -48,12 +47,10 @@ export class QuizComponent {
 	next() {
 		this.translation = '';
 		this.clearEvaluate();
-		this.clearReveal();
 		this.updateWord();
 	}
 
 	evaluate() {
-		this.clearReveal();
 		this.isEvaluated = true;
 		this.isCorrect = this.translation === this.word.ru;
 		if (!this.isCorrect)
@@ -62,8 +59,7 @@ export class QuizComponent {
 
 	reveal() {
 		this.clearEvaluate();
-		this.isRevealed = true;
-		this.focusOnTranslation();
+		this.translation = this.word.ru;
 	}
 	
 	private updateWord(): void {
@@ -85,10 +81,6 @@ export class QuizComponent {
 	private clearEvaluate() {
 		this.isEvaluated = false;
 		this.isCorrect = false;
-	}
-	
-	private clearReveal() {
-		this.isRevealed = false;
 	}
 
 	private focusOnTranslation() {
