@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NoWord, Word, WordId, WordService } from '../word.service';
 import { concatMap, iif, of, tap } from 'rxjs';
 import { randomInt } from '../util';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
@@ -15,7 +17,16 @@ function calcRandomWordId(numWords: number): WordId {
 @Component({
 	selector: 'app-quiz',
 	standalone: true,
-	imports: [ FormsModule, MatButton, MatCardModule, MatFormFieldModule, NgIf ],
+	imports: [
+		FormsModule,
+		MatButton,
+		MatCardModule,
+		MatFormFieldModule,
+		MatIconButton,
+		MatIconModule,
+		MatInputModule,
+		NgIf
+	],
 	templateUrl: './quiz.component.html',
 	styleUrl: './quiz.component.css'
 })
@@ -26,6 +37,7 @@ export class QuizComponent {
 	isCorrect = false;
 	isEvaluated = false;
 	isRevealed = false;
+	@ViewChild('translationInput') translationInput!: ElementRef;
 	
 	constructor(private wordService: WordService) { }
 
@@ -44,11 +56,14 @@ export class QuizComponent {
 		this.clearReveal();
 		this.isEvaluated = true;
 		this.isCorrect = this.translation === this.word.ru;
+		if (!this.isCorrect)
+			this.focusOnTranslation();
 	}
 
 	reveal() {
 		this.clearEvaluate();
 		this.isRevealed = true;
+		this.focusOnTranslation();
 	}
 	
 	private updateWord(): void {
@@ -61,7 +76,10 @@ export class QuizComponent {
 		);
 		wordCount$.pipe(
 			concatMap((count: number) => this.wordService.getWord(calcRandomWordId(count)))
-		).subscribe((word: Word) => this.word = word);
+		).subscribe((word: Word) => {
+			this.word = word;
+			this.focusOnTranslation();
+		});
 	}
 	
 	private clearEvaluate() {
@@ -71,5 +89,10 @@ export class QuizComponent {
 	
 	private clearReveal() {
 		this.isRevealed = false;
+	}
+
+	private focusOnTranslation() {
+		if (this.translationInput)
+			this.translationInput.nativeElement.focus();
 	}
 }

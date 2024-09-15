@@ -5,26 +5,41 @@
 		</mat-card-header>
 
 		<mat-card-content class="card-content">
-			<div class="word-lang">English</div>
-			<div class="word">{{ word.en }}</div>
-			<div class="word-class">{{ word.wordClass }}</div>
-			<div class="translation-lang">Russian</div>
+
+			<mat-form-field [style.width.px]=400>
+				<mat-label>English</mat-label>
+				<input matInput type="text" readonly value="{{ word.en }} ({{ word.wordClass }})" />
+			</mat-form-field>
+			
 			<div class="translation">
-				<input type="text" id="translation" name="translation" required [(ngModel)]="translation" />
-				<span class="evaluate" [hidden]="!isEvaluated">
-					<span *ngIf="isCorrect; else incorrect">Correct</span>
+				<mat-form-field [style.width.px]=400>
+					<mat-label>Russian</mat-label>
+					<input matInput type="text" #translationInput [(ngModel)]="translation" />
+				</mat-form-field>
+				<span class="evaluate-result" [hidden]="!isEvaluated">
+					<span class="evaluate-correct" *ngIf="isCorrect; else incorrect">
+						<mat-icon>check</mat-icon></span>
 					<ng-template #incorrect>
-						<span>Wrong</span>
+						<span class="evaluate-incorrect">
+							<mat-icon>block</mat-icon>
+						</span>
 					</ng-template>
 				</span>
-				<span class="reveal" [hidden]="!isRevealed">{{ word.ru }}</span>
+				<span class="reveal-result" [hidden]="!isRevealed">{{ word.ru }}</span>
 			</div>
+		
 		</mat-card-content>
 		
 		<mat-card-actions class="card-actions">
-			<button mat-button (click)="evaluate()">Check</button>
-			<button mat-button (click)="reveal()">Reveal</button>
-			<button mat-button (click)="next()">Next</button>
+			<button mat-icon-button (click)="evaluate()">
+				<mat-icon>check</mat-icon>
+			</button>
+			<button mat-icon-button (click)="reveal()">
+				<mat-icon>question_mark</mat-icon>
+			</button>
+			<button mat-icon-button (click)="next()">
+				<mat-icon>arrow_forward_ios</mat-icon>
+			</button>
 		</mat-card-actions>
 	</mat-card>
 </div>
