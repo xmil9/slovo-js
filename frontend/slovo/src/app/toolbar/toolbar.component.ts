@@ -12,4 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class ToolbarComponent {
 
+	onAppIconClicked() {
+		// todo - navigate to default route
+	}
 }
