@@ -62,6 +62,10 @@ export class QuizComponent {
 		this.translation = this.word.ru;
 	}
 	
+	onTranslationEnterKey() {
+		this.evaluate();
+	}
+
 	private updateWord(): void {
 		const wordCount$ = iif(
 			() => this.numWords > 0,
